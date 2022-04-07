@@ -1,0 +1,51 @@
+from traceback import print_tb
+from selenium import webdriver
+from bs4 import BeautifulSoup
+from time import sleep
+driver = webdriver.Firefox()
+driver.get('https://www.noon.com/uae-en/iphone-13-pro-max-256gb-sierra-blue-5g-with-facetime-international-version/N50840187A/p/?o=c63a3dd3e009519d')
+sleep(3)
+driver.find_element_by_id('Reviews').click()
+sleep(3)
+# review = driver.find_element_by_class_name('reviewDesc')
+# rev = driver.find_element_by_css_selector('div.noonReviewItem:nth-child(1) > div:nth-child(2)')
+# # soup = BeautifulSoup(rev,"html.parser")
+# print(rev.get_attribute('innerHTML'))
+html  = driver.page_source
+soup_en = BeautifulSoup(html,"html.parser")
+
+rev_en = soup_en.find_all('div',class_='reviewDesc')
+date_en = soup_en.find_all('div',class_='ratedDate')
+# print(date_en)
+for i in range(0,len(rev_en)) :
+    print(rev_en[i].get_text().strip())
+    print(date_en[i].get_text().strip())
+
+# driver.find_element_by_css_selector('div.select_lang:nth-child(3)').click()
+# html_ar = driver.page_source
+# soup_ar = BeautifulSoup(html_ar,"html.parser")
+# rev_ar = soup_ar.find_all('div',class_='reviewDesc')
+# if len(rev_ar) < 0 :
+#     ##for
+#     pass
+# else :
+#     ### print there is no arbic reviews and dont append to the list
+#     pass
+
+
+
+
+
+
+
+
+
+# star = []
+# star_en = soup_en.find('div',class_='mainDetails').find_all('div',class_='ratingCover')
+# for i in star_en :
+# #     # star.append(i.get_text().count('oneStar'))
+#     print(str(i).count('oneStar'))
+# print(star_en)
+
+
+#### finish the code and the stars code isnt finished yet
